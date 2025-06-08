@@ -3,7 +3,7 @@ package com.example.convertisseur.model;
 public class Devise {
     private String code;
     private String nom;
-    private double tauxVersXof; // ✅ au lieu de tauxVersEuro
+    private double tauxVersXof; 
 
     public Devise() {}
 
