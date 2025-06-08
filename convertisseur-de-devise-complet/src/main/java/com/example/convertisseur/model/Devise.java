@@ -3,14 +3,14 @@ package com.example.convertisseur.model;
 public class Devise {
     private String code;
     private String nom;
-    private double tauxVersEuro;
+    private double tauxVersXof; // ✅ au lieu de tauxVersEuro
 
     public Devise() {}
 
-    public Devise(String code, String nom, double tauxVersEuro) {
+    public Devise(String code, String nom, double tauxVersXof) {
         this.code = code;
         this.nom = nom;
-        this.tauxVersEuro = tauxVersEuro;
+        this.tauxVersXof = tauxVersXof;
     }
 
     public String getCode() {
@@ -29,11 +29,11 @@ public class Devise {
         this.nom = nom;
     }
 
-    public double getTauxVersEuro() {
-        return tauxVersEuro;
+    public double getTauxVersXof() {
+        return tauxVersXof;
     }
 
-    public void setTauxVersEuro(double tauxVersEuro) {
-        this.tauxVersEuro = tauxVersEuro;
+    public void setTauxVersXof(double tauxVersXof) {
+        this.tauxVersXof = tauxVersXof;
     }
 }
