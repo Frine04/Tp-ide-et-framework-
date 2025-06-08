@@ -1,8 +1,9 @@
 package com.example.convertisseur.service;
 
 import com.example.convertisseur.model.Currency;
-import com.example.convertisseur.model.*;
-import com.example.convertisseur.repository.*;
+import com.example.convertisseur.model.Conversion;
+import com.example.convertisseur.repository.CurrencyRepository;
+import com.example.convertisseur.repository.ConversionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +20,24 @@ public class ConversionService {
     private ConversionRepository conversionRepo;
 
     public Double convert(String from, String to, Double amount) {
+        // Récupère les devises source et cible
         Currency fromCurrency = currencyRepo.findByCode(from)
                 .orElseThrow(() -> new RuntimeException("Devise source inconnue"));
         Currency toCurrency = currencyRepo.findByCode(to)
                 .orElseThrow(() -> new RuntimeException("Devise cible inconnue"));
 
-        double rate = toCurrency.getRateToEuro() / fromCurrency.getRateToEuro();
+
+        if (fromCurrency.getRateToXof() == null || toCurrency.getRateToXof() == null) {
+            throw new RuntimeException("Taux de conversion (par rapport au XOF) manquant pour une des devises.");
+        }
+
+        double rate = toCurrency.getRateToXof() / fromCurrency.getRateToXof();
         double result = amount * rate;
 
+        // Sauvegarde la conversion
         Conversion conversion = new Conversion();
-        conversion.setFromCurrency(fromCurrency); // ✅ passe l’objet
-        conversion.setToCurrency(toCurrency);     // ✅ passe l’objet
+        conversion.setFromCurrency(fromCurrency);
+        conversion.setToCurrency(toCurrency);
         conversion.setAmount(amount);
         conversion.setResult(result);
         conversion.setDate(LocalDateTime.now());
