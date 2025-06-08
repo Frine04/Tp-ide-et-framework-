@@ -9,22 +9,23 @@ public class Currency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String code;
 
-    private double rateToEuro;
+    private String name;
 
-    // Constructeurs
-    public Currency() {
-    }
 
-    public Currency(String code, double rateToEuro) {
-        this.code = code;
-        this.rateToEuro = rateToEuro;
-    }
+    @Column(name = "rate_to_xof")
+    private Double rateToXof;
 
-    // Getters & Setters
+    // === Getters et Setters ===
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -35,11 +36,19 @@ public class Currency {
         this.code = code;
     }
 
-    public double getRateToEuro() {
-        return rateToEuro;
+    public String getName() {
+        return name;
     }
 
-    public void setRateToEuro(double rateToEuro) {
-        this.rateToEuro = rateToEuro;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getRateToXof() {
+        return rateToXof;
+    }
+
+    public void setRateToXof(Double rateToXof) {
+        this.rateToXof = rateToXof;
     }
 }
