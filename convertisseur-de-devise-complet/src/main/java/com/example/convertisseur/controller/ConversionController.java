@@ -29,7 +29,7 @@ public class ConversionController {
         return service.getAllConversions();
     }
 
-    // GET /api/conversion/simple?from=EUR&to=USD&amount=10
+ 
     // Conversion simple sans passer par le service ni sauvegarde (méthode rapide)
     @GetMapping("/simple")
     public double simpleConvert(
